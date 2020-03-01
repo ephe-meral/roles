@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Page, Tab, Tabbar } from 'react-onsenui';
+import { Navigator, Page, Tab, Tabbar } from 'react-onsenui';
 import { Start } from './components/Start';
 
-const tabs = [
-  ['Start', 'md-view-module', <Start key="Start" />]
-];
+const tabs = [['Start', 'md-view-module', Start]];
 
-const App = () => {
+const Main = ({ navigator }) => {
   const [tab, setTab] = useState();
 
   return (
@@ -17,13 +15,27 @@ const App = () => {
         position="bottom"
         index={tab}
         renderTabs={() =>
-          tabs.map(([label, icon, component]) => ({
-            content: component,
+          tabs.map(([label, icon, Component]) => ({
+            content: <Component key={label} navigator={navigator} />,
             tab: <Tab key={label} label={label} icon={icon} />
           }))
         }
       />
     </Page>
+  );
+};
+
+const App = () => {
+  return (
+    <Navigator
+      initialRoute={{ component: Main, props: { key: 'main' } }}
+      renderPage={(route, navigator) => {
+        const props = route.props || {};
+        props.navigator = navigator;
+
+        return React.createElement(route.component, props);
+      }}
+    />
   );
 };
 

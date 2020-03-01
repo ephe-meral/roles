@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import { Col, Row, SearchInput } from 'react-onsenui';
+import { Button, Col, Row, SearchInput } from 'react-onsenui';
+import { Session } from './Session';
 import { TabPage } from './TabPage';
 
-const Start = () => {
+const Start = ({ navigator }) => {
   const [input, setInput] = useState();
 
   return (
@@ -20,7 +21,16 @@ const Start = () => {
           />
         </Row>
         <Row>
-          <p>Input: {input ? input : '...'}</p>
+          <p>Input: {input || '...'}</p>
+        </Row>
+        <Row>
+          <Button
+            onClick={() =>
+              navigator.pushPage({ component: Session, props: { key: 'Session', title: 'Test' } })
+            }
+          >
+            Try me!{' '}
+          </Button>
         </Row>
       </Col>
     </TabPage>
