@@ -1,0 +1,48 @@
+{
+  "name": "",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "author": "Johanna Appel (@ephe-meral)",
+  "license": "MIT",
+  "dependencies": {
+    "onsenui": "^2.10.10",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-onsenui": "^1.11.2",
+    "react-scripts": "3.4.0",
+    "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "npm-check-updates": "^4.0.1",
+    "prettier": "^1.19.1",
+    "pwa-asset-generator": "^2.2.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build-assets": "cd public && npx pwa-asset-generator logo.svg -i index.html -m manifest.json"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
