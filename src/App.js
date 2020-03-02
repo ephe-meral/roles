@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Navigator, Page, Tab, Tabbar } from 'react-onsenui';
-import { Start } from './components/Start';
+import { Sessions } from './components/Sessions';
+import { Roles } from './components/Roles';
 
-const tabs = [['Start', 'md-view-module', Start]];
+const tabs = [
+  ['Sessions', 'fa-comments', Sessions],
+  ['Roles', 'fa-address-card', Roles]
+];
 
 const Main = ({ navigator }) => {
   const [tab, setTab] = useState();

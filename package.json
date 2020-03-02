@@ -12,6 +12,7 @@
     "react-hookstore": "^1.4.3",
     "react-onsenui": "^1.11.2",
     "react-scripts": "3.4.0",
+    "shortid": "^2.2.15",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {

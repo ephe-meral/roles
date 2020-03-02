@@ -4,11 +4,11 @@ import { Button, Col, Row, SearchInput } from 'react-onsenui';
 import { Session } from './Session';
 import { TabPage } from './TabPage';
 
-const Start = ({ navigator }) => {
+const Sessions = ({ navigator }) => {
   const [input, setInput] = useState();
 
   return (
-    <TabPage label="Start">
+    <TabPage label="Sessions">
       <Col css="height: 100%">
         <Row css="margin-bottom: 0.5em">
           <SearchInput
@@ -37,4 +37,4 @@ const Start = ({ navigator }) => {
   );
 };
 
-export { Start };
+export { Sessions };

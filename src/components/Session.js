@@ -4,7 +4,7 @@ import { BackButton, Fab, Col, Row, SearchInput } from 'react-onsenui';
 import { Log, useLogStore } from '../stores/Log';
 import { TabPage } from './TabPage';
 
-const Session = ({ navigator, title }) => {
+const Session = ({ title }) => {
   const [log, setLog] = useLogStore(title);
   const [input, setInput] = useState();
 
