@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page, Toolbar } from 'react-onsenui';
 
-const TabPage = ({ children, label, leftButton = null, rightButton = null }) => (
+const TabPage = ({ children, label, leftButton = null, rightButton = null, renderBottomToolbar }) => (
   <Page
     renderToolbar={() => (
       <Toolbar>
@@ -13,6 +13,7 @@ const TabPage = ({ children, label, leftButton = null, rightButton = null }) => 
       </Toolbar>
     )}
     contentStyle={{ padding: '1em' }}
+    renderBottomToolbar={renderBottomToolbar}
   >
     {children}
   </Page>
