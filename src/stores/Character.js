@@ -6,6 +6,7 @@ const LOCALSTORAGE_ID = 'chars';
 
 // Structure of a character:
 const EMPTY_CHARACTER = {
+  id: 'ABCabc',
   fullName: 'Unnamed Character',
   shortCode: 'UC',
   color: '#000000',
@@ -28,16 +29,15 @@ const useCharacterStore = () => useStore(_characterStore);
 
 // Ex.: `setCharacters(Characters.addCharacter(characters, 'Jane Doe', 'JD', '#aa0000', 'data:image/png;base64,iVBORw0/*...*/'))`
 class Characters {
-  static createOrUpdateCharacter = (
+  static edit = (
     characters,
-    { fullName, shortCode, color, profilePic },
-    id = shortid.generate()
+    { id = shortid.generate(), fullName, shortCode, color, profilePic }
   ) => ({
     ...characters,
-    [id]: { fullName, shortCode, color, profilePic }
+    [id]: { id, fullName, shortCode, color, profilePic }
   });
 
-  static removeCharacter = (characters, id) => {
+  static remove = (characters, id) => {
     const res = { ...characters };
     delete res[id];
     return res;

@@ -1,12 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { findDOMNode } from 'react-dom';
 import styled from 'styled-components/macro';
-import { Button, Col, Icon, List, ListItem, Row, ToolbarButton } from 'react-onsenui';
+import {
+  Col,
+  Icon,
+  List,
+  ToolbarButton
+} from 'react-onsenui';
 import { Characters, useCharacterStore } from '../stores/Character';
-import { AddRole } from './AddRole';
+import { DeletableListItem } from './DeletableListItem';
+import { EditRole } from './EditRole';
 import { TabPage } from './TabPage';
+
+const RoleListItem = ({
+  character: { fullName, shortCode, color },
+  onEdit,
+  onDelete,
+  modifier
+}) => (
+  <DeletableListItem onClick={onEdit} onDelete={onDelete} modifier={modifier}>
+    <div
+      css={`
+        color: ${color};
+      `}
+    >{`[${shortCode}] ${fullName}`}</div>
+    <Icon icon="fa-edit" fixedWidth={false} css="color: gray; vertical-align: middle" />
+  </DeletableListItem>
+);
 
 const Roles = ({ navigator }) => {
   const [characters, setCharacters] = useCharacterStore();
+
+  const saveCharacter = character => {
+    setCharacters(Characters.edit(characters, character));
+    navigator.popPage();
+  };
 
   return (
     <TabPage
@@ -15,12 +43,9 @@ const Roles = ({ navigator }) => {
         <ToolbarButton
           onClick={() =>
             navigator.pushPage({
-              component: AddRole,
+              component: EditRole,
               props: {
-                onSave: character => {
-                  setCharacters(Characters.createOrUpdateCharacter(characters, character));
-                  navigator.popPage();
-                }
+                onSave: saveCharacter
               }
             })
           }
@@ -31,23 +56,23 @@ const Roles = ({ navigator }) => {
     >
       <Col css="height: 100%">
         <List
-          dataSource={Object.entries(characters)}
-          renderRow={([id, { fullName, shortCode, color }], idx) => (
-            <ListItem
+          css="width: 100%"
+          dataSource={Object.values(characters)}
+          renderRow={(character, idx) => (
+            <RoleListItem
+              character={character}
+              onEdit={() =>
+                navigator.pushPage({
+                  component: EditRole,
+                  props: {
+                    character,
+                    onSave: saveCharacter
+                  }
+                })
+              }
+              onDelete={() => setCharacters(Characters.remove(characters, character.id))}
               modifier={idx === Object.entries(characters).length - 1 ? 'longdivider' : null}
-            >
-              <p
-                css={`
-                  color: ${color};
-                `}
-              >{`[${shortCode}] ${fullName}`}</p>{' '}
-              <Button
-                modifier="quiet"
-                onClick={() => setCharacters(Characters.removeCharacter(characters, id))}
-              >
-                Remove
-              </Button>
-            </ListItem>
+            />
           )}
         />
       </Col>
