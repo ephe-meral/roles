@@ -6,6 +6,7 @@ import { DeletableListItem } from './DeletableListItem';
 import { EditSession } from './EditSession';
 import { Session } from './Session';
 import { TabPage } from './TabPage';
+import { SettingsPopover } from './SettingsPopover';
 
 const SessionListItem = ({ title, onClick, onDelete, modifier }) => (
   <DeletableListItem onClick={onClick} onDelete={onDelete} modifier={modifier}>
@@ -15,8 +16,10 @@ const SessionListItem = ({ title, onClick, onDelete, modifier }) => (
 );
 
 const Sessions = ({ navigator }) => {
-  const [input, setInput] = useState();
   const [logs, setLogs] = useLogsStore();
+  const [input, setInput] = useState();
+  const [settingsButtonRef, setSettingsButtonRef] = useState();
+  const [settingsVisible, setSettingsVisible] = useState(false);
 
   const saveLog = log => {
     setLogs(Logs.edit(logs, log));
@@ -26,6 +29,14 @@ const Sessions = ({ navigator }) => {
   return (
     <TabPage
       label="Sessions"
+      leftButton={
+        <ToolbarButton
+          onClick={() => setSettingsVisible(true)}
+          ref={ref => setSettingsButtonRef(ref)}
+        >
+          <Icon icon="fa-bars" fixedWidth={false} css="vertical-align: middle" />
+        </ToolbarButton>
+      }
       rightButton={
         <ToolbarButton
           onClick={() =>
@@ -41,6 +52,11 @@ const Sessions = ({ navigator }) => {
         </ToolbarButton>
       }
     >
+      <SettingsPopover
+        getTarget={() => settingsButtonRef}
+        isOpen={settingsVisible}
+        onClose={() => setSettingsVisible(false)}
+      />
       <Col css="height: 100%">
         <List
           css="width: 100%"

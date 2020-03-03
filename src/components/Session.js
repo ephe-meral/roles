@@ -18,7 +18,14 @@ const Session = ({ title, logId }) => {
   const [input, setInput] = useState();
   const [chatEndRef, setChatEndRef] = useState();
 
-  const scrollDown = () => chatEndRef && chatEndRef.scrollIntoView({ behavior: 'smooth' });
+  const scrollDown = () => {
+    // Not sure why (styled components?) but this needed a timeout to scroll
+    // correctly the first time (otherwise leaves a gap)
+    setTimeout(
+      () => chatEndRef && chatEndRef.scrollIntoView({ behavior: 'auto', block: 'nearest' }),
+      100
+    );
+  };
 
   useEffect(() => scrollDown(), [chatEndRef, log]);
 
@@ -63,7 +70,7 @@ const Session = ({ title, logId }) => {
         css={`
           width: unset;
           flex-grow: 1;
-          padding: 0 0.5em;
+          margin: 0 0.5em;
           & input {
             color: ${participants[selectedParticipant].color};
           }
@@ -109,7 +116,14 @@ const Session = ({ title, logId }) => {
           </div>
         </div>
       ))}
-      <div ref={ref => setChatEndRef(ref)} />
+      <div
+        css={`
+          with: 100%;
+          height: 1px;
+          opacity: 0;
+        `}
+        ref={ref => setChatEndRef(ref)}
+      />
     </TabPage>
   );
 };
