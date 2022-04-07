@@ -8,7 +8,7 @@ Create [Homestuck](https://www.homestuck.com)-like dialogs from your mobile devi
 
 I use it to try and get a distanced view on ideas, problems etc. that I try to solve, by role-playing 3rd party observers or experts that evaluate them.
 
-It works better than just thinking about something, since you have a record of what has been written by each party and you have enough time during each interaction to emphasize with the role you're taking/playing.
+It works better than just thinking about something, since you have a record of what has been written by each party and you have enough time during each interaction to empathize with the role you're taking/playing.
 
 Think of it as a cheap way to get coaching from someone who knows you better than most people.
 
