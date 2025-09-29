@@ -23,7 +23,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "npm-check-updates": "^4.0.1",
     "prettier": "^1.19.1",
-    "pwa-asset-generator": "^2.2.2"
+    "pwa-asset-generator": "^8.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
